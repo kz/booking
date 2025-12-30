@@ -3,9 +3,9 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from .api import bookings, students, tutors
-from .database import database, models
-from .schemas import schemas
+from backend.api import bookings, students, tutors
+from backend.database import database, models
+from backend.schemas import schemas
 
 
 @asynccontextmanager

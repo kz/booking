@@ -3,11 +3,11 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from .base import override_get_db, test_db
+from backend.tests.base import override_get_db, test_db
 
-from ..main import app
-from ..database.database import Base, get_db
-from ..database import models
+from backend.main import app
+from backend.database.database import Base, get_db
+from backend.database import models
 
 
 app.dependency_overrides[get_db] = override_get_db
