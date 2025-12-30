@@ -41,64 +41,97 @@ export default function BookingsManager({ initialBookings }: Props) {
 
   return (
     <div>
-      <div className="bg-gray-50 p-6 rounded mb-8">
+      <form
+        action={handleSubmit}
+        className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-8"
+      >
         <h2 className="text-xl font-bold mb-4">Add Booking</h2>
         {error && <div className="text-red-600 mb-4">{error}</div>}
 
-        <form action={handleSubmit} className="flex gap-4">
-          <input
-            name="tutor_id"
-            type="number"
-            placeholder="Tutor ID"
-            className="border p-2 rounded"
-            required
-          />
-          <input
-            name="student_id"
-            type="number"
-            placeholder="Student ID"
-            className="border p-2 rounded"
-            required
-          />
-          <input
-            name="start_time"
-            type="datetime-local"
-            className="border p-2 rounded"
-            required
-          />
-          <input
-            name="end_time"
-            type="datetime-local"
-            className="border p-2 rounded"
-            required
-          />
+        <div className="flex flex-col gap-4">
+          {/* Tutor ID Input Group */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Tutor ID
+            </label>
+            <input
+              name="tutor_id"
+              type="number"
+              placeholder="Enter tutor ID"
+              className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+              required
+            />
+          </div>
+
+          {/* Student ID Input Group */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Student ID
+            </label>
+            <input
+              name="student_id"
+              type="number"
+              placeholder="Enter student ID"
+              className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+              required
+            />
+          </div>
+
+          {/* Start Time Input Group */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Start Time
+            </label>
+            <input
+              name="start_time"
+              type="datetime-local"
+              className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+              required
+            />
+          </div>
+
+          {/* End Time Input Group */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              End Time
+            </label>
+            <input
+              name="end_time"
+              type="datetime-local"
+              className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+              required
+            />
+          </div>
+
+          {/* Submit Button - full width for better mobile/desktop experience */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-blue-600 text-white p-2 rounded disabled:opacity-50"
+            className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
           >
-            {isSubmitting ? "Saving..." : "Add"}
+            {isSubmitting ? "Booking..." : "Confirm Booking"}
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
 
-      <ul className="space-y-4">
+      <div className="space-y-4">
         {bookings.map((booking) => (
-          <li
+          <div
             key={booking.id}
-            className="p-4 border rounded shadow-sm flex justify-between"
+            className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm flex justify-between"
           >
-            <span className="text-gray-700">Booking ID: {booking.id}</span>
-            <span className="font-semibold">
-              Tutor {booking.tutor_id} - Student {booking.student_id}
-            </span>
-            <span className="text-gray-500">
-              {new Date(booking.start_time).toLocaleString()} -{" "}
-              {new Date(booking.end_time).toLocaleTimeString()}
-            </span>
-          </li>
+            <div>
+              <h3 className="font-semibold text-gray-800">
+                Tutor {booking.tutor_id} - Student {booking.student_id}
+              </h3>
+              <p className="text-sm text-gray-500">
+                {new Date(booking.start_time).toLocaleString()} -{" "}
+                {new Date(booking.end_time).toLocaleTimeString()}
+              </p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
